@@ -1,0 +1,55 @@
+server:
+  port: 8083  # Port on which the application will run
+
+spring:
+  application:
+    name: FEEDBACK-SERVICE # Unique name for this service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/feedbackmicroservice_db
+    username: root
+    password: Root@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+  cloud:
+    discovery:
+      client:
+        service-url:
+          defaultZone: http://localhost:8761/eureka/  # Eureka Server URL
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Eureka Server URL
+    register-with-eureka: true  # This service will register with Eureka
+    fetch-registry: true  # This service will fetch the registry from Eureka
+  instance:
+    hostname: localhost  # Optional: define hostname if needed
+    prefer-ip-address: true  # Optional: prefer IP address over hostname
+  feedback:
+    service:
+      url: http://FEEDBACK-SERVICE
+
+
+
+#server:
+#  port: 8083  # Port on which the application will run
+#spring:
+#  datasource:
+#    application:
+#      name: Feedback_microservice
+#    url: jdbc:mysql://localhost:3306/feedbackmicroservice_db
+#    username: root
+#    password: Root@123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+#
